@@ -10,7 +10,10 @@ public class Unicycle : MonoBehaviour
     public float moveSpeed = 10f;        // 이동 속도
 
     [Range(0f, 1f)]
-    public float moveTiltAngle = 0.3f;   // 이동 시 기울기 각도
+    public float moveTiltAngle = 0.1f;   // 이동 시 기울기 각도
+
+    [Range(0f, 1f)]
+    public float maxTiltAngle = 0.5f;    // 최대 기울기 각도
 
     private int moveDirection = 0;
 
@@ -36,6 +39,8 @@ public class Unicycle : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyTilt();
+
+        CheckDirection();
         ApplyMove();
     }
 
@@ -53,19 +58,33 @@ public class Unicycle : MonoBehaviour
         rb.AddTorque(worldTorque * tiltTorque, ForceMode.Acceleration);
     }
 
+    private void CheckDirection()
+    {
+        var rotation = transform.rotation.z;
+        
+        if (Math.Abs(rotation) < moveTiltAngle) {
+            moveDirection = 0;
+        }
+        else {
+            moveDirection = rotation > 0 ? -1 : 1;
+        }
+    }
+
     private void ApplyMove()
     {
-        moveDirection = 0;
-        
-        if (Math.Abs(transform.rotation.z) > moveTiltAngle)
-        {
-            moveDirection = transform.rotation.z > 0 ? -1 : 1; 
-        }
-
         if (moveDirection != 0)
         {
-            Vector3 moveOffset = transform.right * moveDirection * moveSpeed * Time.fixedDeltaTime;
+            var moveSpeedWithTilt = GetMoveSpeed();
+            var moveOffset = transform.right * moveDirection * moveSpeedWithTilt * Time.fixedDeltaTime;
+
             rb.MovePosition(rb.position + moveOffset);
         }
+    }
+
+    private float GetMoveSpeed()
+    {
+        var tilt = Mathf.Min(Mathf.Abs(transform.rotation.z), maxTiltAngle) / maxTiltAngle;
+            tilt = Mathf.Pow(tilt, 2); // 제곱하여 민감도 조절
+        return moveSpeed * tilt;
     }
 }

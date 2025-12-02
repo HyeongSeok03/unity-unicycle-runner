@@ -695,8 +695,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1254418258}
   tiltTorque: 10
-  moveSpeed: 1
+  moveSpeed: 3
   moveTiltAngle: 0.1
+  maxTiltAngle: 0.5
 --- !u!136 &3469287837362647991
 CapsuleCollider:
   m_ObjectHideFlags: 0
