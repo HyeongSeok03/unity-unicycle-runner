@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,8 +7,12 @@ public class Unicycle : MonoBehaviour
     [Header("Physics")]
     public Rigidbody rb;
     public float tiltTorque = 50f;       // 회전 힘
-    public float autoBalanceForce = 5f;  // 중심 복원 세기
-    public float maxTiltAngle = 30f;     // 최대 기울기 제한
+    public float moveSpeed = 10f;        // 이동 속도
+
+    [Range(0f, 1f)]
+    public float moveTiltAngle = 0.3f;   // 이동 시 기울기 각도
+
+    private int moveDirection = 0;
 
     private Vector2 moveInput;
 
@@ -31,6 +36,7 @@ public class Unicycle : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyTilt();
+        ApplyMove();
     }
 
     private void ApplyTilt()
@@ -45,5 +51,21 @@ public class Unicycle : MonoBehaviour
         Vector3 worldTorque = transform.TransformDirection( torque );
 
         rb.AddTorque(worldTorque * tiltTorque, ForceMode.Acceleration);
+    }
+
+    private void ApplyMove()
+    {
+        moveDirection = 0;
+        
+        if (Math.Abs(transform.rotation.z) > moveTiltAngle)
+        {
+            moveDirection = transform.rotation.z > 0 ? -1 : 1; 
+        }
+
+        if (moveDirection != 0)
+        {
+            Vector3 moveOffset = transform.right * moveDirection * moveSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(rb.position + moveOffset);
+        }
     }
 }
