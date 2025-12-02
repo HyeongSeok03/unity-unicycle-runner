@@ -15,6 +15,9 @@ public class Unicycle : MonoBehaviour
     [Range(0f, 1f)]
     public float maxTiltAngle = 0.5f;    // 최대 기울기 각도
 
+    [Range(0f, 1f)]
+    public float gameOverTiltAngle = 0.7f; // 게임 오버 기울기 각도
+
     private int moveDirection = 0;
 
     private Vector2 moveInput;
@@ -40,7 +43,7 @@ public class Unicycle : MonoBehaviour
     {
         ApplyTilt();
 
-        CheckDirection();
+        CheckRotation();
         ApplyMove();
     }
 
@@ -58,15 +61,20 @@ public class Unicycle : MonoBehaviour
         rb.AddTorque(worldTorque * tiltTorque, ForceMode.Acceleration);
     }
 
-    private void CheckDirection()
+    private void CheckRotation()
     {
         var rotation = transform.rotation.z;
-        
+
         if (Math.Abs(rotation) < moveTiltAngle) {
             moveDirection = 0;
         }
         else {
             moveDirection = rotation > 0 ? -1 : 1;
+        }
+
+        if (Mathf.Abs(rotation) > gameOverTiltAngle)
+        {
+            Debug.Log("Game Over!");
         }
     }
 
