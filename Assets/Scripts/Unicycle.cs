@@ -8,6 +8,7 @@ public class Unicycle : MonoBehaviour
     public Rigidbody rb;
     public float tiltTorque = 50f;       // 회전 힘
     public float moveSpeed = 10f;        // 이동 속도
+    public float moveRange = 5f;         // 이동 범위
 
     [Range(0f, 1f)]
     public float moveTiltAngle = 0.1f;   // 이동 시 기울기 각도
@@ -85,7 +86,10 @@ public class Unicycle : MonoBehaviour
             var moveSpeedWithTilt = GetMoveSpeed();
             var moveOffset = transform.right * moveDirection * moveSpeedWithTilt * Time.fixedDeltaTime;
 
-            rb.MovePosition(rb.position + moveOffset);
+            Vector3 targetPosition = rb.position + moveOffset;
+            targetPosition.x = Mathf.Clamp(targetPosition.x, -moveRange, moveRange);
+
+            rb.MovePosition(targetPosition);
         }
     }
 
