@@ -9,6 +9,7 @@ public class Unicycle : MonoBehaviour
     public float tiltTorque = 50f;       // 회전 힘
     public float moveSpeed = 10f;        // 이동 속도
     public float moveRange = 5f;         // 이동 범위
+    public float jumpForce = 8f;        // 점프 힘
 
     [Range(0f, 1f)]
     public float moveTiltAngle = 0.1f;   // 이동 시 기울기 각도
@@ -19,10 +20,11 @@ public class Unicycle : MonoBehaviour
     [Range(0f, 1f)]
     public float gameOverTiltAngle = 0.7f; // 게임 오버 기울기 각도
 
-    private int moveDirection = 0;
-
-    private Vector2 moveInput;
-
+    private int _moveDirection = 0;
+    private bool _isGrounded;
+    
+    private Vector2 _moveInput;
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,35 +32,45 @@ public class Unicycle : MonoBehaviour
 
     private void Start()
     {
-        Vector3 com = rb.centerOfMass;
+        var com = rb.centerOfMass;
         com.y = -0.5f;
         rb.centerOfMass = com;
     }
-
-    public void OnMove(InputValue value)
-    {
-        moveInput = value.Get<Vector2>(); // (x: A/D, y: W/S)
-    }
-
+    
     private void FixedUpdate()
     {
         ApplyTilt();
-
         CheckRotation();
         ApplyMove();
+    }
+    
+    private void Update()
+    {
+        CheckGrounded();
+    }
+    
+    private void OnMove(InputValue value)
+    {
+        _moveInput = value.Get<Vector2>(); // (x: A/D)
+    }
+
+    private void OnJump(InputValue value)
+    {
+        if (!_isGrounded) return;
+        rb.linearVelocity = new Vector3(0, jumpForce);
+    }
+    
+    private void CheckGrounded()
+    {
+        RaycastHit hit;
+        _isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f);
     }
 
     private void ApplyTilt()
     {
-        // 입력값으로 토크 생성
-        Vector3 torque = new Vector3(
-            moveInput.y, // W/S = pitch 방향 (앞/뒤 기울임)
-             0f,
-            -moveInput.x   // A/D = roll 방향 (좌/우 기울임)
-        );
-
-        Vector3 worldTorque = transform.TransformDirection( torque );
-
+        var torque = new Vector3(0f, 0f, -_moveInput.x);
+        var worldTorque = transform.TransformDirection(torque);
+        
         rb.AddTorque(worldTorque * tiltTorque, ForceMode.Acceleration);
     }
 
@@ -67,26 +79,26 @@ public class Unicycle : MonoBehaviour
         var rotation = transform.rotation.z;
 
         if (Math.Abs(rotation) < moveTiltAngle) {
-            moveDirection = 0;
+            _moveDirection = 0;
         }
         else {
-            moveDirection = rotation > 0 ? -1 : 1;
+            _moveDirection = rotation > 0 ? -1 : 1;
         }
 
         if (Mathf.Abs(rotation) > gameOverTiltAngle)
         {
-            Debug.Log("Game Over!");
+            // 게임 오버 처리
         }
     }
 
     private void ApplyMove()
     {
-        if (moveDirection != 0)
+        if (_moveDirection != 0)
         {
             var moveSpeedWithTilt = GetMoveSpeed();
-            var moveOffset = transform.right * moveDirection * moveSpeedWithTilt * Time.fixedDeltaTime;
+            var moveOffset = transform.right * (_moveDirection * moveSpeedWithTilt * Time.fixedDeltaTime);
 
-            Vector3 targetPosition = rb.position + moveOffset;
+            var targetPosition = rb.position + moveOffset;
             targetPosition.x = Mathf.Clamp(targetPosition.x, -moveRange, moveRange);
 
             rb.MovePosition(targetPosition);
