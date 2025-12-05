@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    private static LevelManager _instance;
+    public static LevelManager Instance;
     
     public int level = 1;
     
@@ -23,12 +23,12 @@ public class LevelManager : MonoBehaviour
     
     public static float GetObstacleSpeed()
     {
-        return _instance.obstacleSpeed;
+        return Instance.obstacleSpeed;
     }
     
     private void Awake()
     {
-        _instance = this;
+        Instance = this;
         _initialSpeed = obstacleSpeed;
         StartCoroutine(SpawnObstacleCoroutine());
     }
@@ -83,4 +83,8 @@ public class LevelManager : MonoBehaviour
         print($"Level Up! 현재 레벨: {level}, 스폰 간격: {spawnInterval}초");
     }
     
+    public void StopSpawning()
+    {
+        StopAllCoroutines();
+    }
 }
