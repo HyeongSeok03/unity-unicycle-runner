@@ -81,6 +81,13 @@ public class Unicycle : MonoBehaviour
         rb.AddTorque(worldTorque * tiltTorque, ForceMode.Acceleration);
     }
 
+    public void ApplyTiltExternalTorque(bool rightWind, float torque)
+    {
+        if (_isDead) return;
+        float direction = rightWind ? -1f : 1f;
+        rb.AddTorque(new Vector3(0f, 0f, torque * direction), ForceMode.Force);
+    }
+
     private void CheckRotation()
     {
         if (_isDead) return;
