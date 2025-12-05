@@ -20,9 +20,15 @@ public class Unicycle : MonoBehaviour
     [Range(0f, 1f)]
     public float gameOverTiltAngle = 0.7f; // 게임 오버 기울기 각도
 
+    [Header("Ground Check Settings")]
+    public Transform groundCheckPoint; // 지면 체크 위치
+    public LayerMask groundLayer;      // 지면 레이어
+    public float groundCheckRadius = 0.3f; // 지면 체크 반경
+
+
     private int _moveDirection = 0;
     private bool _isGrounded;
-    
+    private bool _isDead = false;
     private Vector2 _moveInput;
     
     private void Awake()
@@ -62,12 +68,13 @@ public class Unicycle : MonoBehaviour
     
     private void CheckGrounded()
     {
-        RaycastHit hit;
-        _isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f);
+        _isGrounded = Physics.CheckSphere(groundCheckPoint.position, groundCheckRadius, groundLayer);
     }
 
     private void ApplyTilt()
     {
+        if (_isDead) return;
+
         var torque = new Vector3(0f, 0f, -_moveInput.x);
         var worldTorque = transform.TransformDirection(torque);
         
@@ -76,6 +83,8 @@ public class Unicycle : MonoBehaviour
 
     private void CheckRotation()
     {
+        if (_isDead) return;
+
         var rotation = transform.rotation.z;
 
         if (Math.Abs(rotation) < moveTiltAngle) {
@@ -87,12 +96,22 @@ public class Unicycle : MonoBehaviour
 
         if (Mathf.Abs(rotation) > gameOverTiltAngle)
         {
-            // 게임 오버 처리
+            if(_isGrounded)
+            {
+                Die();
+            }
+            else
+            {
+                rb.freezeRotation = true;
+                LevelManager.Instance.StopSpawning();
+            }
         }
     }
 
     private void ApplyMove()
     {
+        if (_isGrounded && _isDead) return;
+
         if (_moveDirection != 0)
         {
             var moveSpeedWithTilt = GetMoveSpeed();
@@ -110,5 +129,22 @@ public class Unicycle : MonoBehaviour
         var tilt = Mathf.Min(Mathf.Abs(transform.rotation.z), maxTiltAngle) / maxTiltAngle;
             tilt = Mathf.Pow(tilt, 2); // 제곱하여 민감도 조절
         return moveSpeed * tilt;
+    }
+
+    public void Die()
+    {
+        // 게임 오버 처리
+        if(_isDead) return;
+        
+        _isDead = true;
+        LevelManager.Instance.StopSpawning();
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        print("Game Over");
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
     }
 }
