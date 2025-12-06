@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Unicycle : MonoBehaviour
 {
@@ -24,12 +25,13 @@ public class Unicycle : MonoBehaviour
     public Transform groundCheckPoint; // 지면 체크 위치
     public LayerMask groundLayer;      // 지면 레이어
     public float groundCheckRadius = 0.3f; // 지면 체크 반경
+    [Header("UI Settings")]
+    public Slider tiltSlider;          // 기울기 각도 표시 슬라이더
 
 
     // 원래 값을 저장할 변수 - ice area에서 변경 후 복원용
     private float _defaultTiltTorque;
     private float _defaultAngularDamping;
-    private bool _isOnIce = false;
 
     private int _moveDirection = 0;
     private bool _isGrounded;
@@ -50,6 +52,7 @@ public class Unicycle : MonoBehaviour
     
     private void FixedUpdate()
     {
+        CheckGrounded();
         ApplyTilt();
         CheckRotation();
         ApplyMove();
@@ -57,9 +60,16 @@ public class Unicycle : MonoBehaviour
     
     private void Update()
     {
-        CheckGrounded();
+        UpdateSlider();
     }
-    
+
+    private void UpdateSlider()
+    {
+        // Slider 값 업데이트
+        if(!_isDead)
+            tiltSlider.value = -transform.rotation.z / maxTiltAngle;
+    }
+
     private void OnMove(InputValue value)
     {
         _moveInput = value.Get<Vector2>(); // (x: A/D)
@@ -80,7 +90,6 @@ public class Unicycle : MonoBehaviour
     {
         if (isOnIce)
         {
-            _isOnIce = true;
             _defaultTiltTorque = tiltTorque;
             _defaultAngularDamping = rb.angularDamping;
 
@@ -89,7 +98,6 @@ public class Unicycle : MonoBehaviour
         }
         else
         {
-            _isOnIce = false;
             tiltTorque = _defaultTiltTorque;
             rb.angularDamping = _defaultAngularDamping;
         }
