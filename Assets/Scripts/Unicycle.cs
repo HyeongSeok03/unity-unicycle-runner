@@ -95,6 +95,22 @@ public class Unicycle : MonoBehaviour
         }
     }
 
+    // intensity: 좌우 흔들림 강도 (Torque)
+    // bounce: 위로 튀는 강도 (Vertical Force)
+    public void ApplyRoughness(float intensity, float bounce)
+    {
+        if (_isDead) return;
+        if(!_isGrounded) return; // 공중에서는 효과 없음
+
+        // 좌우 랜덤 토크 (-1 ~ 1 사이 랜덤)
+        float randomTilt = UnityEngine.Random.Range(-1f, 1f) * intensity;
+        rb.AddTorque(new Vector3(0, 0, randomTilt), ForceMode.Impulse); // Impulse 사용!
+
+        // 위로 살짝 튀는 힘 (0 ~ 1 사이 양수) -> 돌 밟았을 때 덜컹!
+        float randomBounce = UnityEngine.Random.Range(0f, 1f) * bounce;
+        rb.AddForce(new Vector3(0, randomBounce, 0), ForceMode.Impulse);
+    }
+
     private void ApplyTilt()
     {
         if (_isDead) return;
