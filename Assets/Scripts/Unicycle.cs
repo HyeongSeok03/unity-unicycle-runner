@@ -26,6 +26,11 @@ public class Unicycle : MonoBehaviour
     public float groundCheckRadius = 0.3f; // 지면 체크 반경
 
 
+    // 원래 값을 저장할 변수 - ice area에서 변경 후 복원용
+    private float _defaultTiltTorque;
+    private float _defaultAngularDamping;
+    private bool _isOnIce = false;
+
     private int _moveDirection = 0;
     private bool _isGrounded;
     private bool _isDead = false;
@@ -69,6 +74,25 @@ public class Unicycle : MonoBehaviour
     private void CheckGrounded()
     {
         _isGrounded = Physics.CheckSphere(groundCheckPoint.position, groundCheckRadius, groundLayer);
+    }
+
+    public void SetOnIce(bool isOnIce, float torqueMultiplier)
+    {
+        if (isOnIce)
+        {
+            _isOnIce = true;
+            _defaultTiltTorque = tiltTorque;
+            _defaultAngularDamping = rb.angularDamping;
+
+            tiltTorque *= torqueMultiplier; // 빙판에서 회전 힘 감소
+            rb.angularDamping = 0f;
+        }
+        else
+        {
+            _isOnIce = false;
+            tiltTorque = _defaultTiltTorque;
+            rb.angularDamping = _defaultAngularDamping;
+        }
     }
 
     private void ApplyTilt()
