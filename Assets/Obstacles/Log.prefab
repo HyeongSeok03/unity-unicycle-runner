@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rotationTorque: 3
-  springForce: 5
+  rotationTorque: 5
+  springForce: 10
 --- !u!33 &1851372803652576125
 MeshFilter:
   m_ObjectHideFlags: 0
