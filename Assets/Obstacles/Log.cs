@@ -4,8 +4,12 @@ public class Log : Obstacle
 {
     [SerializeField] private float rotationTorque = 3f;
     [SerializeField] private float springForce = 10f;
-    
-    protected override void Hit(Unicycle player)
+
+    private void Start()
+    {
+        Destroy(gameObject, 10f);
+    }
+        protected override void Hit(Unicycle player)
     {
         base.Hit(player);
         
