@@ -61,9 +61,9 @@ public class LevelManager : MonoBehaviour
             {
                 obstacleSpeed += speedIncreaseRate * 0.1f;
                 obstacleSpeed = Mathf.Min(obstacleSpeed, maxObstacleSpeed);
-                score += level;
-                OnScoreChanged?.Invoke(score);
             }
+            score += level;
+            OnScoreChanged?.Invoke(score);
         }
     }
 
