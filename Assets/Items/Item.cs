@@ -10,7 +10,7 @@ public class Item : MonoBehaviour
 
     void Start()
     {
-        moveSpeed = LevelManager.GetObstacleSpeed();
+        // moveSpeed = LevelManager.GetObstacleSpeed();
         Destroy(gameObject, 10f);
     }
 

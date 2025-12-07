@@ -27,6 +27,11 @@ public class LevelManager : MonoBehaviour
     {
         return instance.obstacleSpeed;
     }
+
+    public static void SetObstacleSpeed(float speed)
+    {
+        instance.obstacleSpeed = speed;
+    }
     
     private void Awake()
     {

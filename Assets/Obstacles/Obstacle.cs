@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    [SerializeField] public float moveSpeed = 5f;
     [SerializeField] public Vector3 offsetPosition;
     [SerializeField] protected Renderer obstacleRenderer;
     
@@ -22,14 +21,9 @@ public class Obstacle : MonoBehaviour
         }
     }
     
-    private void Start()
-    {
-        moveSpeed = LevelManager.GetObstacleSpeed();
-    }
-    
     private void Update()
     {
-        transform.Translate(Vector3.back * (moveSpeed * Time.deltaTime));
+        transform.Translate(Vector3.back * (LevelManager.GetObstacleSpeed() * Time.deltaTime));
         if (transform.position.z < 0f)
         {
             var newColor = obstacleRenderer.material.color;

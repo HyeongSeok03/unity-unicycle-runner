@@ -12,7 +12,6 @@ public class Unicycle : MonoBehaviour
     public float moveSpeed = 10f;        // 이동 속도
     public float moveRange = 5f;         // 이동 범위
     public float jumpForce = 8f;        // 점프 힘
-    public float centerOfMassY = 0.1f; // 무게 중심 높이
 
     [Range(-0.5f, 0.5f)] public float centerOfMassY = 0.1f; // 무게 중심 Y 위치
     [Range(0f, 1f)] public float moveTiltAngle = 0.1f;   // 이동 시 기울기 각도
@@ -29,6 +28,7 @@ public class Unicycle : MonoBehaviour
     private Vector2 _moveInput;
     
     public bool isGrounded => _isGrounded;
+    public bool shieldActive = false;
     
     
     private void Awake()
@@ -124,8 +124,10 @@ public class Unicycle : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         var position = transform.position + groundCheckPosition;
-        Gizmos.DrawWireSphere(transform.position + groundCheckPosition, groundCheckRadius);
+        Gizmos.DrawWireSphere(position, groundCheckRadius);
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(rb.centerOfMass + centerOfMassHeight * Vector3.up, 0.1f);
+        Vector3 pos = rb.centerOfMass;
+        pos.y = centerOfMassY;
+        Gizmos.DrawSphere(pos, 0.1f);
     }
 }

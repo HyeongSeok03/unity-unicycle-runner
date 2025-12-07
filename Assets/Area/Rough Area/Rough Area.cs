@@ -15,7 +15,7 @@ public class RoughArea : Area
         if (player.isGrounded)
         {
             var randomSpring = Random.Range(0f, springForce);
-            player.rb.linearVelocity = new Vector3(0f, randomSpring, 0f);
+            player.rb.AddForce(Vector3.up * randomSpring, ForceMode.Impulse);
         }
             
     }
