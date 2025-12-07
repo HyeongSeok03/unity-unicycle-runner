@@ -7,7 +7,7 @@ public class Log : Obstacle
 
     private void Start()
     {
-        Destroy(gameObject, 10f);
+        
     }
     
     protected override void Hit(Unicycle player)
