@@ -9,7 +9,7 @@ public class WindArea : Area
     
     private void Start()
     {
-        _direction = Random.value < 0.5f ? -1 : 1;
+        _direction = -1;
         windEffect.transform.localScale = new Vector3(1f, 1f, -1 * _direction);
     }
     
