@@ -12,25 +12,15 @@ public class Unicycle : MonoBehaviour
     public float moveRange = 5f;         // 이동 범위
     public float jumpForce = 8f;        // 점프 힘
 
-    [Range(0f, 1f)]
-    public float moveTiltAngle = 0.1f;   // 이동 시 기울기 각도
-
-    [Range(0f, 1f)]
-    public float maxTiltAngle = 0.5f;    // 최대 기울기 각도
-
-    [Range(0f, 1f)]
-    public float gameOverTiltAngle = 0.7f; // 게임 오버 기울기 각도
+    [Range(0f, 1f)] public float moveTiltAngle = 0.1f;   // 이동 시 기울기 각도
+    [Range(0f, 1f)] public float maxTiltAngle = 0.5f;    // 최대 기울기 각도
+    [Range(0f, 1f)] public float gameOverTiltAngle = 0.7f; // 게임 오버 기울기 각도
 
     [Header("Ground Check Settings")]
-    public Transform groundCheckPoint; // 지면 체크 위치
+    public Vector3 groundCheckPosition; // 지면 체크 위치
     public LayerMask groundLayer;      // 지면 레이어
     public float groundCheckRadius = 0.3f; // 지면 체크 반경
-
-
-    // 원래 값을 저장할 변수 - ice area에서 변경 후 복원용
-    private float _defaultTiltTorque;
-    private float _defaultAngularDamping;
-
+    
     private int _moveDirection = 0;
     private bool _isGrounded;
     private Vector2 _moveInput;
@@ -43,7 +33,7 @@ public class Unicycle : MonoBehaviour
     private void Start()
     {
         var com = rb.centerOfMass;
-        com.y = -0.5f;
+        com.y = 0.1f;
         rb.centerOfMass = com;
     }
     
@@ -73,39 +63,8 @@ public class Unicycle : MonoBehaviour
     
     private void CheckGrounded()
     {
-        _isGrounded = Physics.CheckSphere(groundCheckPoint.position, groundCheckRadius, groundLayer);
-    }
-
-    public void SetOnIce(bool isOnIce, float torqueMultiplier)
-    {
-        if (isOnIce)
-        {
-            _defaultTiltTorque = tiltTorque;
-            _defaultAngularDamping = rb.angularDamping;
-
-            tiltTorque *= torqueMultiplier; // 빙판에서 회전 힘 감소
-            rb.angularDamping = 0f;
-        }
-        else
-        {
-            tiltTorque = _defaultTiltTorque;
-            rb.angularDamping = _defaultAngularDamping;
-        }
-    }
-
-    // intensity: 좌우 흔들림 강도 (Torque)
-    // bounce: 위로 튀는 강도 (Vertical Force)
-    public void ApplyRoughness(float intensity, float bounce)
-    {
-        if(!_isGrounded) return; // 공중에서는 효과 없음
-
-        // 좌우 랜덤 토크 (-1 ~ 1 사이 랜덤)
-        float randomTilt = UnityEngine.Random.Range(-1f, 1f) * intensity;
-        rb.AddTorque(new Vector3(0, 0, randomTilt), ForceMode.Impulse); // Impulse 사용!
-
-        // 위로 살짝 튀는 힘 (0 ~ 1 사이 양수) -> 돌 밟았을 때 덜컹!
-        float randomBounce = UnityEngine.Random.Range(0f, 1f) * bounce;
-        rb.AddForce(new Vector3(0, randomBounce, 0), ForceMode.Impulse);
+        var position = transform.position + groundCheckPosition;
+        _isGrounded = Physics.CheckSphere(position, groundCheckRadius, groundLayer);
     }
 
     private void ApplyTilt()
@@ -115,13 +74,7 @@ public class Unicycle : MonoBehaviour
         
         rb.AddTorque(worldTorque * tiltTorque, ForceMode.Acceleration);
     }
-
-    public void ApplyTiltExternalTorque(bool rightWind, float torque)
-    {
-        float direction = rightWind ? -1f : 1f;
-        rb.AddTorque(new Vector3(0f, 0f, torque * direction), ForceMode.Force);
-    }
-
+    
     private void CheckRotation()
     {
         var rotation = transform.rotation.z;
@@ -160,9 +113,10 @@ public class Unicycle : MonoBehaviour
         return moveSpeed * tilt;
     }
 
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
+        var position = transform.position + groundCheckPosition;
+        Gizmos.DrawWireSphere(transform.position + groundCheckPosition, groundCheckRadius);
     }
 }
