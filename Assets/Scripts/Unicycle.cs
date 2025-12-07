@@ -121,12 +121,15 @@ public class Unicycle : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        // 1. 기존 GroundCheck 시각화 (그대로 유지)
         Gizmos.color = Color.cyan;
         var position = transform.position + groundCheckPosition;
         Gizmos.DrawWireSphere(position, groundCheckRadius);
+
         Gizmos.color = Color.red;
-        Vector3 pos = rb.centerOfMass;
-        pos.y = centerOfMassY;
-        Gizmos.DrawSphere(pos, 0.1f);
+
+        Vector3 localCOM = new Vector3(0, centerOfMassY, 0);
+        Vector3 drawPos = transform.TransformPoint(localCOM);
+        Gizmos.DrawSphere(drawPos, 0.1f);
     }
 }
