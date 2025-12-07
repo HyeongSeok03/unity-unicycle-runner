@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.07, y: 0.9, z: 11.1}
-  m_LocalScale: {x: 1.33, y: 13.3, z: 13.3}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 15, y: 5, z: 15}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4982768301123213545}
   m_Father: {fileID: 0}
@@ -53,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.0568889}
-  m_Center: {x: 0, y: 0, z: 0.028444448}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7592753811067040407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,8 +67,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cd2831d6f465c48a2dfd3b4a0d8453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightWind: 1
-  force: 100
+  isActive: 0
+  isOnce: 0
+  updateInterval: 0.1
+  torque: 5
+  windEffect: {fileID: 4546306909721471151}
 --- !u!1 &4690641486277645871
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,13 +98,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4690641486277645871}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7047801, z: -0, w: 0.70942587}
-  m_LocalPosition: {x: -1.034, y: 0.237, z: -0.007}
-  m_LocalScale: {x: 0.054024853, y: 0.054024853, z: 0.054024853}
-  m_ConstrainProportionsScale: 1
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2804795953111267954}
-  m_LocalEulerAnglesHint: {x: 0, y: 89.624, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!198 &4546306909721471151
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -741,7 +744,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 18, y: 2, z: 18}
+    m_Scale: {x: 3, y: 3, z: 3}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0

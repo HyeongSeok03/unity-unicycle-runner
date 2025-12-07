@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Unicycle : MonoBehaviour
 {
+    public static Unicycle instance;
+    
     [Header("Physics")]
     public Rigidbody rb;
     public float tiltTorque = 50f;       // 회전 힘
@@ -25,8 +26,11 @@ public class Unicycle : MonoBehaviour
     private bool _isGrounded;
     private Vector2 _moveInput;
     
+    public bool isGrounded => _isGrounded;
+    
     private void Awake()
     {
+        instance = this;
         rb = GetComponent<Rigidbody>();
     }
 
