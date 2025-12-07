@@ -707,63 +707,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!1001 &570202070
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 96205921797716308, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 96205921797716308, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 96205921797716308, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 96205921797716308, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 96205921797716308, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 96205921797716308, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 96205921797716308, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 96205921797716308, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 96205921797716308, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 96205921797716308, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7642850003594531154, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
-      propertyPath: m_Name
-      value: Icy Area
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7335693cf81c3594eb2214f5a19d69f9, type: 3}
 --- !u!1 &575825794
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,6 +786,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1394117917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &772756072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 772756073}
+  - component: {fileID: 772756074}
+  m_Layer: 0
+  m_Name: ObstacleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &772756073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772756072}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1434612883}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &772756074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772756072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc49db306a546e896f0e756e9ec916a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacles:
+  - {fileID: 4632117505144479868, guid: 163844c9f7befeb4d8cee7faadeeb5d1, type: 3}
+  spawnPosition: {x: 0, y: 1, z: 20}
+  spawnInterval: 5
+  minSpawnInterval: 1
 --- !u!1 &801354315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,11 +1258,6 @@ MonoBehaviour:
   score: 0
   level: 1
   timePerLevel: 15
-  obstacles:
-  - {fileID: 4632117505144479868, guid: 163844c9f7befeb4d8cee7faadeeb5d1, type: 3}
-  - {fileID: 6145308601216592641, guid: 2991c1b5c38140a459381554c6c6f216, type: 3}
-  spawnPosition: {x: 0, y: 1, z: 20}
-  spawnInterval: 5
   obstacleSpeed: 5
   speedIncreaseRate: 0.5
   maxObstacleSpeed: 20
@@ -1286,7 +1273,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 772756073}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1602932554
@@ -1311,7 +1299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2804795953111267954, guid: a7b0273ea6c54f04a91bdf33ada98435, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 28.2
       objectReference: {fileID: 0}
     - target: {fileID: 2804795953111267954, guid: a7b0273ea6c54f04a91bdf33ada98435, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1391,6 +1379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1728606137}
+  - component: {fileID: 1728606139}
   - component: {fileID: 1728606138}
   m_Layer: 5
   m_Name: Tilt Slider
@@ -1473,6 +1462,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1728606139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728606136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a704582769f3b3a4ea5f6ee4f1b2cd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiltSlider: {fileID: 1728606138}
 --- !u!1 &1903940871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1899,6 +1901,5 @@ SceneRoots:
   - {fileID: 1236500713}
   - {fileID: 1434612883}
   - {fileID: 1983640049}
-  - {fileID: 570202070}
   - {fileID: 1602932554}
   - {fileID: 543450653263577407}
