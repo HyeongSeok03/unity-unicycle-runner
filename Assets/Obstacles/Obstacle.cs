@@ -8,7 +8,7 @@ public class Obstacle : MonoBehaviour
     
     protected virtual void Hit(Unicycle player)
     {
-        
+        player.rb.constraints = RigidbodyConstraints.None;
     }
     
     private void OnTriggerEnter(Collider other)
