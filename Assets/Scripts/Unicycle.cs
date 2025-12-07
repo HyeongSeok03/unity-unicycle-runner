@@ -12,7 +12,6 @@ public class Unicycle : MonoBehaviour
     public float moveSpeed = 10f;        // 이동 속도
     public float moveRange = 5f;         // 이동 범위
     public float jumpForce = 8f;        // 점프 힘
-    public float centerOfMassY = 0.1f; // 무게 중심 높이
 
     [Range(-0.5f, 0.5f)] public float centerOfMassY = 0.1f; // 무게 중심 Y 위치
     [Range(0f, 1f)] public float moveTiltAngle = 0.1f;   // 이동 시 기울기 각도
@@ -28,8 +27,7 @@ public class Unicycle : MonoBehaviour
     private bool _isGrounded;
     private Vector2 _moveInput;
     
-    public bool isGrounded => _isGrounded;
-    
+    public bool IsGrounded => _isGrounded;
     
     private void Awake()
     {
@@ -50,11 +48,6 @@ public class Unicycle : MonoBehaviour
         ApplyTilt();
         CheckRotation();
         ApplyMove();
-    }
-
-    private void OnDisable()
-    {
-        StageManager.GameOver();
     }
     
     private void OnMove(InputValue value)
@@ -95,7 +88,7 @@ public class Unicycle : MonoBehaviour
 
         if (Mathf.Abs(rotation) > gameOverTiltAngle)
         {
-            Destroy(gameObject, 1f);
+            GameManager.instance.GameOver();
         }
     }
 
@@ -120,12 +113,12 @@ public class Unicycle : MonoBehaviour
         return moveSpeed * tilt;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
-        var position = transform.position + groundCheckPosition;
         Gizmos.DrawWireSphere(transform.position + groundCheckPosition, groundCheckRadius);
+        
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(rb.centerOfMass + centerOfMassHeight * Vector3.up, 0.1f);
+        Gizmos.DrawSphere(rb.centerOfMass + centerOfMassY * Vector3.up, 0.1f);
     }
 }

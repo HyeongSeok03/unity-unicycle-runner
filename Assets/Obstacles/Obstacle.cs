@@ -18,7 +18,7 @@ public class Obstacle : MonoBehaviour
         {
             var player = other.GetComponent<Unicycle>();
             Hit(player);
-            Destroy(player.gameObject, 2f);
+            GameManager.instance.GameOver();
         }
     }
     

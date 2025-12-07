@@ -12,7 +12,7 @@ public class RoughArea : Area
         var randomTorque = Random.Range(-torqueForce, torqueForce);
         player.rb.AddTorque(new Vector3(0f, 0f, randomTorque), ForceMode.Force);
 
-        if (player.isGrounded)
+        if (player.IsGrounded)
         {
             var randomSpring = Random.Range(0f, springForce);
             player.rb.linearVelocity = new Vector3(0f, randomSpring, 0f);
