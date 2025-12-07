@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,12 +10,9 @@ public class LevelManager : MonoBehaviour
     public event Action<int> OnScoreChanged;
     
     public int level = 1;
-    public float timePerLevel = 10f;
-    public List<Obstacle> obstacles = new List<Obstacle>();
+    public event Action<int> OnLevelChanged;
     
-    [Header("Obstacle Spawn")]
-    public Vector3 spawnPosition = new Vector3(0f, 1f, 20f);
-    public float spawnInterval = 5f;
+    public float timePerLevel = 10f;
     
     [Header("Obstacle Speed")]
     public float obstacleSpeed = 5f;
@@ -26,6 +20,8 @@ public class LevelManager : MonoBehaviour
     public float maxObstacleSpeed = 20f;
     
     private float _initialSpeed;
+    private float _levelTimer = 0f;
+    private ObstacleManager _manager;
     
     public static float GetObstacleSpeed()
     {
@@ -36,8 +32,18 @@ public class LevelManager : MonoBehaviour
     {
         instance = this;
         _initialSpeed = obstacleSpeed;
-        StartCoroutine(SpawnObstacleCoroutine());
+        _manager = GetComponent<ObstacleManager>();
         StartCoroutine(IncreaseSpeedCoroutine());
+    }
+    
+    private void Update()
+    {
+        _levelTimer += Time.deltaTime;
+        if (_levelTimer >= timePerLevel)
+        {
+            LevelUp();
+            _levelTimer = 0f;
+        }
     }
     
     private IEnumerator IncreaseSpeedCoroutine()
@@ -55,41 +61,17 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-    
-    private void SpawnObstacle()
-    {
-        var index = Random.Range(0, obstacles.Count);
-        var obstacle = obstacles[index];
-        var spawnPos = spawnPosition + obstacle.offsetPosition;
-        
-        Instantiate(obstacle, spawnPos, Quaternion.identity);
-    }
-    
-    private IEnumerator SpawnObstacleCoroutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(spawnInterval);
-            SpawnObstacle();
-            
-            if (Time.time % timePerLevel < spawnInterval)
-            {
-                LevelUp();
-            }
-        }
-    }
 
     private void LevelUp()
     {
         level++;
         
-        // 스폰 간격을 줄임 (최소 1초까지)
-        spawnInterval = Mathf.Max(1f, spawnInterval - 0.2f);
+        OnLevelChanged?.Invoke(level);
         
         // 속도 증가율도 올림
         speedIncreaseRate += 0.1f;
         obstacleSpeed = _initialSpeed;
         
-        print($"Level Up! 현재 레벨: {level}, 스폰 간격: {spawnInterval}초");
+        print($"Level Up! 현재 레벨: {level}");
     }
 }
