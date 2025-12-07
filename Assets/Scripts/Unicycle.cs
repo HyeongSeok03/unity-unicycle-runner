@@ -135,7 +135,7 @@ public class Unicycle : MonoBehaviour
 
         if (Mathf.Abs(rotation) > gameOverTiltAngle)
         {
-            StageManager.GameOver();
+            Destroy(gameObject, 1f);
         }
     }
 
