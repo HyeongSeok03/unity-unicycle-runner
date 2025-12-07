@@ -48,7 +48,12 @@ public class Unicycle : MonoBehaviour
     {
         CheckGrounded();
     }
-    
+
+    private void OnDisable()
+    {
+        StageManager.GameOver();
+    }
+
     private void OnMove(InputValue value)
     {
         _moveInput = value.Get<Vector2>(); // (x: A/D)

@@ -1,13 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
-    private static LevelManager _instance;
+    public static LevelManager instance;
+
+    public int score = 0;
+    public event Action<int> OnScoreChanged;
     
     public int level = 1;
-    
+    public float timePerLevel = 10f;
     public List<Obstacle> obstacles = new List<Obstacle>();
     
     [Header("Obstacle Spawn")]
@@ -23,35 +29,40 @@ public class LevelManager : MonoBehaviour
     
     public static float GetObstacleSpeed()
     {
-        return _instance.obstacleSpeed;
+        return instance.obstacleSpeed;
     }
     
     private void Awake()
     {
-        _instance = this;
+        instance = this;
         _initialSpeed = obstacleSpeed;
         StartCoroutine(SpawnObstacleCoroutine());
+        StartCoroutine(IncreaseSpeedCoroutine());
     }
     
-    private void Update()
+    private IEnumerator IncreaseSpeedCoroutine()
     {
-        // 시간이 지날수록 레벨 증가
-        // 일정 시간마다 레벨을 올리는 로직
-        
-        // 시간이 지날수록 속도 증가
-        if (obstacleSpeed < maxObstacleSpeed)
+        while (true)
         {
-            obstacleSpeed += speedIncreaseRate * Time.deltaTime;
-            obstacleSpeed = Mathf.Min(obstacleSpeed, maxObstacleSpeed);
+            yield return new WaitForSeconds(0.1f);
+            
+            if (obstacleSpeed < maxObstacleSpeed)
+            {
+                obstacleSpeed += speedIncreaseRate * 0.1f;
+                obstacleSpeed = Mathf.Min(obstacleSpeed, maxObstacleSpeed);
+                score += level;
+                OnScoreChanged?.Invoke(score);
+            }
         }
     }
     
     private void SpawnObstacle()
     {
-        var randomIndex = Random.Range(0, obstacles.Count);
-        var obstaclePrefab = obstacles[randomIndex];
+        var index = Random.Range(0, obstacles.Count);
+        var obstacle = obstacles[index];
+        var spawnPos = spawnPosition + obstacle.offsetPosition;
         
-        Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity);
+        Instantiate(obstacle, spawnPos, Quaternion.identity);
     }
     
     private IEnumerator SpawnObstacleCoroutine()
@@ -61,8 +72,7 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
             SpawnObstacle();
             
-            // 일정 시간마다 레벨업 (예: 10초마다)
-            if (Time.time % 10f < spawnInterval)
+            if (Time.time % timePerLevel < spawnInterval)
             {
                 LevelUp();
             }
