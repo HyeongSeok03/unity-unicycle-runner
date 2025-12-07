@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7592753811067040407, guid: a7b0273ea6c54f04a91bdf33ada98435, type: 3}
       propertyPath: torque
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
