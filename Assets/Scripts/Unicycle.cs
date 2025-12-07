@@ -33,7 +33,11 @@ public class Unicycle : MonoBehaviour
     
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+
         rb = GetComponent<Rigidbody>();
     }
 

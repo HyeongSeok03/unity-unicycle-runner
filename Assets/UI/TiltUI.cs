@@ -14,6 +14,7 @@ public class TiltUI : MonoBehaviour
 
     private void Update()
     {
-        tiltSlider.value = -1 * _player.transform.rotation.z;
+        if(_player != null)
+            tiltSlider.value = -1 * _player.transform.rotation.z;
     }
 }
