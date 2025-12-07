@@ -9,12 +9,7 @@ public class Log : Obstacle
     {
         base.Hit(player);
 
-        if (player.shieldActive)
-        {
-            player.shieldActive = false;
-            Destroy(gameObject);
-            return;
-        }
+
 
         var dz = Random.Range(-rotationTorque, rotationTorque);
         var torque = new Vector3(rotationTorque, 0f, dz);

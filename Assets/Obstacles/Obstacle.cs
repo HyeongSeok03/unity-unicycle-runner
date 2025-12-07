@@ -15,11 +15,20 @@ public class Obstacle : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            
             var player = other.GetComponent<Unicycle>();
+            if (player.shieldActive)
+            {
+                player.shieldActive = false;
+                Destroy(gameObject);
+                return;
+            }
+            
             Hit(player);
             GameManager.instance.GameOver();
         }
     }
+    
     
     private void Update()
     {

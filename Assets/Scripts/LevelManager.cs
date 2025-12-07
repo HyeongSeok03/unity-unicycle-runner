@@ -16,10 +16,10 @@ public class LevelManager : MonoBehaviour
     
     [Header("Obstacle Speed")]
     public float obstacleSpeed = 5f;
-    public float speedIncreaseRate = 0.5f;
+    public float speedIncreaseRate = 0.1f;
     public float maxObstacleSpeed = 20f;
     
-    private float _initialSpeed;
+    public float initialSpeed;
     private float _levelTimer = 0f;
     private ObstacleManager _manager;
     
@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        _initialSpeed = obstacleSpeed;
+        initialSpeed = obstacleSpeed;
         _manager = GetComponent<ObstacleManager>();
         StartCoroutine(IncreaseSpeedCoroutine());
     }
@@ -75,7 +75,6 @@ public class LevelManager : MonoBehaviour
         
         // 속도 증가율도 올림
         speedIncreaseRate += 0.1f;
-        obstacleSpeed = _initialSpeed;
         
         print($"Level Up! 현재 레벨: {level}");
     }

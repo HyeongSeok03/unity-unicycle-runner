@@ -27,7 +27,7 @@ public class Unicycle : MonoBehaviour
     private bool _isGrounded;
     private Vector2 _moveInput;
     
-    public bool isGrounded => _isGrounded;
+    public bool IsGrounded => _isGrounded;
     public bool shieldActive = false;
     
     

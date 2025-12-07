@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Wall : Obstacle
 {
-    
     [SerializeField] private float rotationTorque = 3f;
     [SerializeField] private float springForce = 10f;
 
@@ -18,12 +17,6 @@ public class Wall : Obstacle
     
     protected override void Hit(Unicycle player)
     {
-        if (player.shieldActive)
-        {
-            player.shieldActive = false;
-            Destroy(gameObject);
-            return;
-        }
 
         var dz = Random.Range(-rotationTorque, rotationTorque);
         var torque = new Vector3(rotationTorque, 0f, dz);
