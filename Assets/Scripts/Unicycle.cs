@@ -10,7 +10,6 @@ public class Unicycle : MonoBehaviour
     public Rigidbody rb;
     public float tiltTorque = 50f;       // 회전 힘
     public float moveSpeed = 10f;        // 이동 속도
-    public float moveRange = 5f;         // 이동 범위
     public float jumpForce = 8f;        // 점프 힘
 
     [Range(-0.5f, 0.5f)] public float centerOfMassY = 0.1f; // 무게 중심 Y 위치
@@ -106,7 +105,6 @@ public class Unicycle : MonoBehaviour
             var moveOffset = transform.right * (_moveDirection * moveSpeedWithTilt * Time.fixedDeltaTime);
 
             var targetPosition = rb.position + moveOffset;
-            targetPosition.x = Mathf.Clamp(targetPosition.x, -moveRange, moveRange);
 
             rb.MovePosition(targetPosition);
         }
@@ -115,7 +113,7 @@ public class Unicycle : MonoBehaviour
     private float GetMoveSpeed()
     {
         var tilt = Mathf.Min(Mathf.Abs(transform.rotation.z), maxTiltAngle) / maxTiltAngle;
-            tilt = Mathf.Pow(tilt, 2); // 제곱하여 민감도 조절
+            // tilt = Mathf.Pow(tilt, 2); // 제곱하여 민감도 조절
         return moveSpeed * tilt;
     }
 

@@ -12,7 +12,7 @@ public class Wall : Obstacle
         var pos = transform.position;
         
         pos.x = possibleX[idx];
-        transform.position = pos;
+        // transform.position = pos;
     }
     
     protected override void Hit(Unicycle player)

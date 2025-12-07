@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 439917852821858167}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -8.32, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -42,6 +42,7 @@ Transform:
   - {fileID: 3567723889715942962}
   - {fileID: 7433206905922342785}
   - {fileID: 6519101330657775787}
+  - {fileID: 8083125103535324981}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &377609417391890700
@@ -56,8 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca4a768ce874b94c82743e8bb971919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  size: {x: 20, y: 10, z: 30}
+  size: {x: 40, y: 20, z: 60}
   color: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1278472453302200906
 GameObject:
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4212791551731747814}
   - component: {fileID: 470560396238643136}
   - component: {fileID: 7164417397573094362}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cargo_container_v1_LD1close (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 3831389514847999662}
   - component: {fileID: 2622555539036723616}
   - component: {fileID: 5145274829396709590}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cargo_container_v1_LD1close (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 6777616155212919627}
   - component: {fileID: 802451034489277038}
   - component: {fileID: 8442143927667130537}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cargo_container_v1_LD1close (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 8646136241453624082}
   - component: {fileID: 2276883715650165899}
   - component: {fileID: 1452682703625596756}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cargo_container_v1_LD1close (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 4386605321140150556}
   - component: {fileID: 196444962565132986}
   - component: {fileID: 3283151338593071440}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cargo_container_v1_LD1close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -611,7 +611,7 @@ GameObject:
   - component: {fileID: 1634844783888455482}
   - component: {fileID: 7455642941644888346}
   - component: {fileID: 7194104957407148176}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wooden_box_v1_LD1square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 8436050851791521462}
   - component: {fileID: 7767653863511513573}
   - component: {fileID: 6612999244984088062}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cargo_container_v1_LD1close (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -827,7 +827,7 @@ GameObject:
   - component: {fileID: 3592735373564138202}
   - component: {fileID: 8593562072804130188}
   - component: {fileID: 6798645299073120627}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cargo_container_v1_LD1close (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,7 +935,7 @@ GameObject:
   - component: {fileID: 7495615404989019061}
   - component: {fileID: 8393359898133195533}
   - component: {fileID: 5101719983815486844}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cargo_container_v1_LD1close (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,7 +1043,7 @@ GameObject:
   - component: {fileID: 3256190989591892379}
   - component: {fileID: 7572177267908851162}
   - component: {fileID: 748383544605424896}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wooden_box_v1_LD1square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,13 +1058,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5846825656355624387}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.099653535, z: -0, w: 0.9950222}
-  m_LocalPosition: {x: 5.81, y: -2.2600002, z: 1.98}
+  m_LocalRotation: {x: -0, y: -0.033223514, z: -0, w: 0.999448}
+  m_LocalPosition: {x: 5.57, y: -2.2600002, z: 3.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2252673258983913705}
-  m_LocalEulerAnglesHint: {x: 0, y: -11.438, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -3.808, z: 0}
 --- !u!33 &3256190989591892379
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1151,7 +1151,7 @@ GameObject:
   - component: {fileID: 6885546454649703478}
   - component: {fileID: 7572628556098369134}
   - component: {fileID: 8221923571733538980}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cargo_container_v1_LD1close (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1259,7 +1259,7 @@ GameObject:
   - component: {fileID: 4263575020636750763}
   - component: {fileID: 8481823738927063984}
   - component: {fileID: 2262059292513353645}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wooden_box_v1_LD1square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1275,7 +1275,7 @@ Transform:
   m_GameObject: {fileID: 7354806413441055782}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0170121, z: -0, w: 0.9998553}
-  m_LocalPosition: {x: 5.89, y: -2.2600002, z: -0.48}
+  m_LocalPosition: {x: 5.8, y: -2.2600002, z: -0.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1341,6 +1341,114 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7354806413441055782}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8101466, y: 0.81238234, z: 0.8101462}
+  m_Center: {x: 0.000000029802322, y: 0.000000014901161, z: 0.000000044703484}
+--- !u!1 &7452072688945506938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8083125103535324981}
+  - component: {fileID: 2896438436439320431}
+  - component: {fileID: 7912358373398198495}
+  - component: {fileID: 6686810214274252063}
+  m_Layer: 3
+  m_Name: Wooden_box_v1_LD1square (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8083125103535324981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7452072688945506938}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.099653535, z: -0, w: 0.9950222}
+  m_LocalPosition: {x: 5.95, y: -2.2600002, z: 1.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2252673258983913705}
+  m_LocalEulerAnglesHint: {x: 0, y: -11.438, z: 0}
+--- !u!33 &2896438436439320431
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7452072688945506938}
+  m_Mesh: {fileID: 4300012, guid: dcf39c3c160b51b49af399efea061f40, type: 3}
+--- !u!23 &7912358373398198495
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7452072688945506938}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 1a087c65608607042accf116f4319d39, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6686810214274252063
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7452072688945506938}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

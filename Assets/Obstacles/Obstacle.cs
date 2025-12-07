@@ -5,7 +5,11 @@ public class Obstacle : MonoBehaviour
 {
     [SerializeField] public Vector3 offsetPosition;
     [SerializeField] protected Renderer obstacleRenderer;
-    
+    private void Start()
+    {
+        obstacleRenderer = GetComponent<Renderer>();
+    }
+
     protected virtual void Hit(Unicycle player)
     {
         player.rb.constraints = RigidbodyConstraints.None;
@@ -32,15 +36,15 @@ public class Obstacle : MonoBehaviour
     
     private void Update()
     {
-        transform.Translate(Vector3.back * (LevelManager.GetObstacleSpeed() * Time.deltaTime));
-        if (transform.position.z < 0f)
-        {
-            var newColor = obstacleRenderer.material.color;
-                newColor.a = 0.5f;
+        //transform.Translate(Vector3.back * (LevelManager.GetObstacleSpeed() * Time.deltaTime));
+        //if (transform.position.z < 0f)
+        //{
+        //    var newColor = obstacleRenderer.material.color;
+        //        newColor.a = 0.5f;
                 
-            obstacleRenderer.material.color = newColor;
+        //    obstacleRenderer.material.color = newColor;
             
-            Destroy(gameObject, 1f);
-        }
+        //    Destroy(gameObject, 1f);
+        //}
     }
 }

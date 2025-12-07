@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] private Unicycle player;
+    private Vector3 camerOffset;
     [SerializeField] private Camera cam;
     [SerializeField] private float maxFovIncrease = 30f;
     private LevelManager _levelManager;
@@ -10,10 +12,12 @@ public class CameraController : MonoBehaviour
     {
         _levelManager = LevelManager.instance;
         _initialFov = cam.fieldOfView;
+        camerOffset = new Vector3(0, 5, -10);
     }
 
     private void Update()
     {
+        cam.transform.position = new Vector3(player.transform.position.x, 5, player.transform.position.z - 10);
         var ratio = (_levelManager.obstacleSpeed - _levelManager.initialSpeed) / _levelManager.maxObstacleSpeed;
         cam.fieldOfView = _initialFov + (maxFovIncrease * ratio);
     }
