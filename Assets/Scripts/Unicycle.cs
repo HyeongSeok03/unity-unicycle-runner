@@ -55,11 +55,6 @@ public class Unicycle : MonoBehaviour
         CheckRotation();
         ApplyMove();
     }
-
-    private void OnDisable()
-    {
-        StageManager.GameOver();
-    }
     
     private void OnMove(InputValue value)
     {
@@ -99,7 +94,7 @@ public class Unicycle : MonoBehaviour
 
         if (Mathf.Abs(rotation) > gameOverTiltAngle)
         {
-            Destroy(gameObject, 1f);
+            GameManager.instance.GameOver();
         }
     }
 
@@ -124,7 +119,7 @@ public class Unicycle : MonoBehaviour
         return moveSpeed * tilt;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
         var position = transform.position + groundCheckPosition;

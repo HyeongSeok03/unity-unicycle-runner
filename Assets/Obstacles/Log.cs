@@ -4,11 +4,6 @@ public class Log : Obstacle
 {
     [SerializeField] private float rotationTorque = 3f;
     [SerializeField] private float springForce = 10f;
-
-    private void Start()
-    {
-        
-    }
     
     protected override void Hit(Unicycle player)
     {
