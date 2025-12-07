@@ -10,13 +10,13 @@ public class GameOverUI : MonoBehaviour
     public void Show()
     {
         canvasGroup.DOFade(1f, duration).OnComplete(OnShowComplete);
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
     }
     
     private void OnShowComplete()
     {
         Time.timeScale = 0;
-        canvasGroup.interactable = true;
-        canvasGroup.blocksRaycasts = true;
     }
     
     public void Restart()
