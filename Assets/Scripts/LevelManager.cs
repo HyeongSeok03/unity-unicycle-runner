@@ -72,6 +72,6 @@ public class LevelManager : MonoBehaviour
         speedIncreaseRate += 0.1f;
         obstacleSpeed = _initialSpeed;
         
-        Debug.Log($"Level Up! 현재 레벨: {level}");
+        print($"Level Up! 현재 레벨: {level}");
     }
 }

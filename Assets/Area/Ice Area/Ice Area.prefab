@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6821283224482060469}
   - component: {fileID: 2033788630868077873}
   m_Layer: 0
-  m_Name: Icy Area
+  m_Name: Ice Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
