@@ -92,9 +92,4 @@ public class LevelManager : MonoBehaviour
         
         print($"Level Up! 현재 레벨: {level}, 스폰 간격: {spawnInterval}초");
     }
-    
-    public void StopSpawning()
-    {
-        StopAllCoroutines();
-    }
 }

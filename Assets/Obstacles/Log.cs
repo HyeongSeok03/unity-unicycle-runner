@@ -9,7 +9,8 @@ public class Log : Obstacle
     {
         Destroy(gameObject, 10f);
     }
-        protected override void Hit(Unicycle player)
+    
+    protected override void Hit(Unicycle player)
     {
         base.Hit(player);
         

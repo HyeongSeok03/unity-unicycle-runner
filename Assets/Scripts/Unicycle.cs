@@ -25,8 +25,6 @@ public class Unicycle : MonoBehaviour
     public Transform groundCheckPoint; // 지면 체크 위치
     public LayerMask groundLayer;      // 지면 레이어
     public float groundCheckRadius = 0.3f; // 지면 체크 반경
-    [Header("UI Settings")]
-    public Slider tiltSlider;          // 기울기 각도 표시 슬라이더
 
 
     // 원래 값을 저장할 변수 - ice area에서 변경 후 복원용
@@ -35,7 +33,6 @@ public class Unicycle : MonoBehaviour
 
     private int _moveDirection = 0;
     private bool _isGrounded;
-    private bool _isDead = false;
     private Vector2 _moveInput;
     
     private void Awake()
@@ -57,22 +54,12 @@ public class Unicycle : MonoBehaviour
         CheckRotation();
         ApplyMove();
     }
-    
-    private void Update()
-    {
-        UpdateSlider();
-    }
 
     private void OnDisable()
     {
         StageManager.GameOver();
-    private void UpdateSlider()
-    {
-        // Slider 값 업데이트
-        if(!_isDead)
-            tiltSlider.value = -transform.rotation.z / maxTiltAngle;
     }
-
+    
     private void OnMove(InputValue value)
     {
         _moveInput = value.Get<Vector2>(); // (x: A/D)
@@ -110,7 +97,6 @@ public class Unicycle : MonoBehaviour
     // bounce: 위로 튀는 강도 (Vertical Force)
     public void ApplyRoughness(float intensity, float bounce)
     {
-        if (_isDead) return;
         if(!_isGrounded) return; // 공중에서는 효과 없음
 
         // 좌우 랜덤 토크 (-1 ~ 1 사이 랜덤)
@@ -124,8 +110,6 @@ public class Unicycle : MonoBehaviour
 
     private void ApplyTilt()
     {
-        if (_isDead) return;
-
         var torque = new Vector3(0f, 0f, -_moveInput.x);
         var worldTorque = transform.TransformDirection(torque);
         
@@ -134,15 +118,12 @@ public class Unicycle : MonoBehaviour
 
     public void ApplyTiltExternalTorque(bool rightWind, float torque)
     {
-        if (_isDead) return;
         float direction = rightWind ? -1f : 1f;
         rb.AddTorque(new Vector3(0f, 0f, torque * direction), ForceMode.Force);
     }
 
     private void CheckRotation()
     {
-        if (_isDead) return;
-
         var rotation = transform.rotation.z;
 
         if (Math.Abs(rotation) < moveTiltAngle) {
@@ -154,22 +135,12 @@ public class Unicycle : MonoBehaviour
 
         if (Mathf.Abs(rotation) > gameOverTiltAngle)
         {
-            if(_isGrounded)
-            {
-                Die();
-            }
-            else
-            {
-                rb.freezeRotation = true;
-                LevelManager.Instance.StopSpawning();
-            }
+            StageManager.GameOver();
         }
     }
 
     private void ApplyMove()
     {
-        if (_isGrounded && _isDead) return;
-
         if (_moveDirection != 0)
         {
             var moveSpeedWithTilt = GetMoveSpeed();
@@ -187,17 +158,6 @@ public class Unicycle : MonoBehaviour
         var tilt = Mathf.Min(Mathf.Abs(transform.rotation.z), maxTiltAngle) / maxTiltAngle;
             tilt = Mathf.Pow(tilt, 2); // 제곱하여 민감도 조절
         return moveSpeed * tilt;
-    }
-
-    public void Die()
-    {
-        // 게임 오버 처리
-        if(_isDead) return;
-        
-        _isDead = true;
-        LevelManager.Instance.StopSpawning();
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        print("Game Over");
     }
 
     void OnDrawGizmos()
