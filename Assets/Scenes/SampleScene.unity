@@ -775,7 +775,6 @@ MonoBehaviour:
   centerOfMassY: -0.2
   moveTiltAngle: 0
   maxTiltAngle: 0.5
-  gameOverTiltAngle: 0.7
   groundCheckPosition: {x: 0, y: -0.45, z: 0}
   groundLayer:
     serializedVersion: 2
@@ -783,6 +782,7 @@ MonoBehaviour:
   groundCheckRadius: 0.3
   wing: {fileID: 1311964523731608}
   shield: {fileID: 1900355388}
+  jumpInput: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   doubleJumpActive: 0
   shieldActive: 0
 --- !u!136 &436709083
