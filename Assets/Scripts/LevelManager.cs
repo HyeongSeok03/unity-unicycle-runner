@@ -60,6 +60,10 @@ public class LevelManager : MonoBehaviour
                 moveSpeed += speedIncreaseRate * 0.1f;
                 moveSpeed = Mathf.Min(moveSpeed, maxObstacleSpeed);
             }
+            else
+            {
+                moveSpeed += speedIncreaseRate * 0.01f;
+            }
             score += level;
             OnScoreChanged?.Invoke(score);
         }
