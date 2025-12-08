@@ -21,14 +21,19 @@ public class Unicycle : MonoBehaviour
     public Vector3 groundCheckPosition; // 지면 체크 위치
     public LayerMask groundLayer;      // 지면 레이어
     public float groundCheckRadius = 0.3f; // 지면 체크 반경
+
+    [Header("Item Active")]
+    public GameObject wing;
+    public GameObject shield;
     
     private int _moveDirection = 0;
     private bool _isGrounded;
     private Vector2 _moveInput;
     
+    public bool doubleJumpActive = false;
     public bool IsGrounded => _isGrounded;
-    public bool shieldActive = false;
     
+    public bool shieldActive = false;
     
     private void Awake()
     {
@@ -62,10 +67,21 @@ public class Unicycle : MonoBehaviour
 
     private void OnJump(InputValue value)
     {
-        if (!_isGrounded) return;
-        rb.linearVelocity = new Vector3(0, jumpForce);
+        if(_isGrounded || CanDoubleJump())
+            rb.linearVelocity = new Vector3(0, jumpForce);
     }
     
+    private bool CanDoubleJump()
+    {
+        if(!_isGrounded && doubleJumpActive)
+        {
+            doubleJumpActive = false;
+            return true;
+        }
+        return false;
+    }
+
+
     private void CheckGrounded()
     {
         var position = transform.position + groundCheckPosition;
