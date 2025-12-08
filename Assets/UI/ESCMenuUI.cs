@@ -20,4 +20,11 @@ public class ESCMenuUI : MonoBehaviour
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
     }
+    
+    public void QuitToMainMenu()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        MusicPlayer.PlayMenuMusic();
+    }
 }

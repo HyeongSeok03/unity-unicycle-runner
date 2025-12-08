@@ -30,7 +30,7 @@ public class Obstacle : MonoBehaviour
             }
             
             Hit(player);
-            GameManager.instance.GameOver();
+            player.GameOver();
         }
     }
     

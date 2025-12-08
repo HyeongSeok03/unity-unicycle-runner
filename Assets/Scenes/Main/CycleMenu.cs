@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class MainMenu : MonoBehaviour
+public class CycleMenu : MonoBehaviour
 {
     private Quaternion _startRotation;
     private void Start()

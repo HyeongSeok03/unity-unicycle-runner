@@ -25,7 +25,7 @@ public class Unicycle : MonoBehaviour
     public GameObject wing;
     public GameObject shield;
 
-    public InputActionReference jumpInput;
+    
     
     private int _moveDirection = 0;
     private bool _isGrounded;
@@ -33,12 +33,20 @@ public class Unicycle : MonoBehaviour
     
     private Item _activeItem;
     
-    public bool doubleJumpActive = false;
-    private bool _doubleJumpUsed = false;
-    
     public bool IsGrounded => _isGrounded;
     
     public bool shieldActive = false;
+    
+    [Header("Jump")]
+    public InputActionReference jumpInput;
+    public bool doubleJumpActive = false;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpClip;
+    [SerializeField] private AudioClip doubleJumpClip;
+    [SerializeField] private AudioClip gameOverClip;
+    private bool _doubleJumpUsed = false;
     
     public void SetActiveItem(Item item)
     {
@@ -69,7 +77,7 @@ public class Unicycle : MonoBehaviour
         {
             Jump();
         }
-        if (jumpInput.action.WasReleasedThisFrame())
+        else if (jumpInput.action.WasReleasedThisFrame())
         {
             JumpCanceled();
         }
@@ -90,7 +98,7 @@ public class Unicycle : MonoBehaviour
 
     private void Jump()
     {
-        if(_isGrounded || CanDoubleJump())
+        if(CanJump())
             rb.linearVelocity = new Vector3(0, jumpForce);
     }
     
@@ -98,7 +106,7 @@ public class Unicycle : MonoBehaviour
     {
         if (rb.linearVelocity.y > 0)
         {
-            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y * 0.25f);
+            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y * 0.5f);
         }
     }
 
@@ -110,14 +118,19 @@ public class Unicycle : MonoBehaviour
         _activeItem = null;
     }
     
-    private bool CanDoubleJump()
+    private bool CanJump()
     {
-        if (!_isGrounded && doubleJumpActive && !_doubleJumpUsed)
+        if (_isGrounded)
         {
-            _doubleJumpUsed = true;
+            audioSource.PlayOneShot(jumpClip);
             return true;
         }
-        
+        if (doubleJumpActive && !_doubleJumpUsed)
+        {
+            _doubleJumpUsed = true;
+            audioSource.PlayOneShot(doubleJumpClip);
+            return true;
+        }
         return false;
     }
 
@@ -175,6 +188,8 @@ public class Unicycle : MonoBehaviour
     private const float GameOverForce = 10f;
     public void GameOver()
     {
+        audioSource.PlayOneShot(gameOverClip);
+        
         rb.constraints = RigidbodyConstraints.None;
         var dz = UnityEngine.Random.Range(-GameOverTorque, GameOverTorque);
         var torque = new Vector3(GameOverTorque, 0f, dz);
