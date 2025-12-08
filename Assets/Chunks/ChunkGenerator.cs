@@ -12,6 +12,10 @@ public class ChunkGenerator : MonoBehaviour
     public float chunkLength = 60f;        // 한 청크 길이 (z 방향)
     public float startOffset = 25f;        // 시작할때 플레이어의 얼마나 앞에 있을지.
 
+    [Header("Item Settings")]
+    public GameObject[] itemPrefabs;       // 아이템 프리팹들
+    public float itemSpawnProbability = 0.2f; // 아이템 스폰 확률
+    
     [Header("Move Settings")]
     public float moveSpeed => LevelManager.instance.moveSpeed;          // 뒤로 움직이는 속도
 
@@ -96,5 +100,15 @@ public class ChunkGenerator : MonoBehaviour
 
         GameObject chunk = Instantiate(prefab, spawnPos, spawnRot, transform);
         activeChunks.Add(chunk);
+        
+        var isSpawnItem = Random.value < itemSpawnProbability;
+        if (isSpawnItem)
+        {
+            var itemIndex = Random.Range(0, itemPrefabs.Length);
+            var itemPrefab = itemPrefabs[itemIndex];
+            var randX = Random.Range(-15f, 15f);
+            var itemSpawnPos = new Vector3(randX, -2f, zPos);
+            Instantiate(itemPrefab, itemSpawnPos, itemPrefab.transform.rotation, chunk.transform);
+        }
     }
 }

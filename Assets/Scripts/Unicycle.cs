@@ -23,7 +23,6 @@ public class Unicycle : MonoBehaviour
 
     [Header("Item Active")]
     public GameObject wing;
-    public GameObject shield;
 
     
     

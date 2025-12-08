@@ -3,22 +3,30 @@ using UnityEngine;
 public class ESCMenuUI : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private float duration = 1f;
+
+    public bool isShown = false;
+    
+    private float _originalTimeScale;
     
     public void Show()
     {
+        if (GameManager.instance.isGameOver) return;
+        
+        _originalTimeScale = Time.timeScale;
         Time.timeScale = 0;
         canvasGroup.alpha = 1f;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
+        isShown = true;
     }
 
     public void Resume()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = _originalTimeScale;
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+        isShown = false;
     }
     
     public void QuitToMainMenu()

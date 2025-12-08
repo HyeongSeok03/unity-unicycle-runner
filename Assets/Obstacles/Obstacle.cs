@@ -24,7 +24,6 @@ public class Obstacle : MonoBehaviour
             if (player.shieldActive)
             {
                 player.shieldActive = false;
-                player.shield.SetActive(false);
                 Destroy(gameObject);
                 return;
             }

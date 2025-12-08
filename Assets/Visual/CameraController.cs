@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        cam.transform.position = new Vector3(player.transform.position.x, 5, player.transform.position.z - 10);
+        cam.transform.position = Vector3.Lerp(cam.transform.position, player.transform.position + new Vector3(0, 5, -10), Time.deltaTime);
         var ratio = (_levelManager.moveSpeed - _levelManager.initialSpeed) / _levelManager.maxObstacleSpeed;
         cam.fieldOfView = _initialFov + (maxFovIncrease * ratio);
     }

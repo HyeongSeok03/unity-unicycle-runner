@@ -7,7 +7,16 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] private AudioClip gameOST;
     [SerializeField] private AudioClip menuOST;
     
+    [Header("Narrations")]
+    [SerializeField] private AudioSource narrationSource;
+    [SerializeField] private AudioClip[] narrationClips;
+    
     private static MusicPlayer _instance;
+    
+    public static void StopNarration()
+    {
+        _instance.narrationSource.Stop();
+    }
     
     public static void PlayGameMusic()
     {
@@ -25,6 +34,13 @@ public class MusicPlayer : MonoBehaviour
         _instance.bgmSource.Play();
     }
 
+    public static void PlayNarration()
+    {
+        if (!_instance) return;
+        var randomIndex = Random.Range(0, _instance.narrationClips.Length);
+        _instance.narrationSource.PlayOneShot(_instance.narrationClips[randomIndex]);
+    }
+    
     private void Awake()
     {
         if (!_instance)

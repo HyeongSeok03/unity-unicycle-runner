@@ -17,11 +17,14 @@ public class GameOverUI : MonoBehaviour
     private void OnShowComplete()
     {
         Time.timeScale = 0;
+        MusicPlayer.PlayNarration();
     }
     
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        MusicPlayer.StopNarration();
         Time.timeScale = 1f;
+        GameManager.instance.isGameOver = false;
     }
 }

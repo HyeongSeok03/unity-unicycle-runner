@@ -6,17 +6,12 @@ public class Item : MonoBehaviour
     [SerializeField] MeshRenderer mr;
     [SerializeField] Collider cd;
     [SerializeField] protected float effectDuration = 3f;
-    [SerializeField] protected float moveSpeed = 5f;
+    [SerializeField] protected float moveSpeed = 1f;
     [SerializeField] GameObject childObject;
     
     [SerializeField] private bool instant = false;
     private bool _active = false;
-
-    private void Start()
-    {
-        moveSpeed = LevelManager.GetObstacleSpeed();
-    }
-
+    
     private void Update()
     {
         transform.Translate(Vector3.back * (moveSpeed * Time.deltaTime));

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ESCMenuUI escMenuUI;
     [SerializeField] private InputActionReference escMenuInput;
 
-    private bool isGameOver;
+    public bool isGameOver;
     
     public static GameManager instance;
     
@@ -21,16 +21,16 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         if (isGameOver) return;
-
         isGameOver = true;
+        
         Time.timeScale = 0.5f;
         ScoreManager.Instance.AddScore(LevelManager.instance.score);
         gameOverUI.Show();
     }
-    
-    public void ToggleESCMenu()
+
+    private void ToggleEscMenu()
     {
-        if (Time.timeScale == 1f)
+        if (!escMenuUI.isShown)
         {
             escMenuUI.Show();
         }
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if (escMenuInput.action.WasPressedThisFrame())
         {
-            ToggleESCMenu();
+            ToggleEscMenu();
         }
     }
 }
