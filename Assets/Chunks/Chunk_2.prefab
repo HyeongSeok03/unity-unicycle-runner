@@ -380,9 +380,9 @@ MonoBehaviour:
   isActive: 0
   isOnce: 0
   updateInterval: 0.1
-  torque: 5
+  torque: 8
   windEffect: {fileID: 2543764338539199665}
-  _direction: 1
+  _direction: -1
 --- !u!1 &1142193776327626415
 GameObject:
   m_ObjectHideFlags: 0
