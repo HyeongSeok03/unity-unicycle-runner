@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2056411323309632818}
   m_Layer: 0
   m_Name: Tilt Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   effectDuration: 3
   moveSpeed: 5
   childObject: {fileID: 7886698180311788592}
+  instant: 0
 --- !u!1 &7885855062899717996
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7592753811067040407}
   m_Layer: 0
   m_Name: Wind Area
-  m_TagString: Untagged
+  m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,6 +72,7 @@ MonoBehaviour:
   updateInterval: 0.1
   torque: 5
   windEffect: {fileID: 4546306909721471151}
+  _direction: 1
 --- !u!1 &4690641486277645871
 GameObject:
   m_ObjectHideFlags: 0

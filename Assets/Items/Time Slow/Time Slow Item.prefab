@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2031662248592487452}
   m_Layer: 0
   m_Name: Time Slow Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   effectDuration: 10
   moveSpeed: 5
   childObject: {fileID: 3891659396212069940}
+  instant: 0
 --- !u!1001 &8137486240507904884
 PrefabInstance:
   m_ObjectHideFlags: 0

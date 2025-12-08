@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3219448883175957959}
   m_Layer: 0
   m_Name: Fly Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,10 +127,11 @@ MonoBehaviour:
   effectDuration: 3
   moveSpeed: 5
   childObject: {fileID: 4610467014847378973}
+  instant: 0
   heightOffset: 2
   riseTime: 0.5
   floatTime: 2
-  fallTime: 0.3
+  fallTime: 0.5
 --- !u!1001 &4611407203612922637
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3061363983567594631}
   m_Layer: 0
   m_Name: Shield Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,6 +72,7 @@ MonoBehaviour:
   effectDuration: 0
   moveSpeed: 5
   childObject: {fileID: 2033236892614879799}
+  instant: 0
 --- !u!1001 &152736079580334166
 PrefabInstance:
   m_ObjectHideFlags: 0

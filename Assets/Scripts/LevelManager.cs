@@ -71,9 +71,6 @@ public class LevelManager : MonoBehaviour
         
         OnLevelChanged?.Invoke(level);
         
-        // 속도 증가율도 올림
-        speedIncreaseRate += 0.1f;
-        
         print($"Level Up! 현재 레벨: {level}");
     }
 }

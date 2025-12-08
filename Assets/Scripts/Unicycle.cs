@@ -128,11 +128,6 @@ public class Unicycle : MonoBehaviour
         else {
             _moveDirection = rotation > 0 ? -1 : 1;
         }
-
-        if (Mathf.Abs(rotation) > gameOverTiltAngle)
-        {
-            GameManager.instance.GameOver();
-        }
     }
 
     private void ApplyMove()
@@ -153,6 +148,23 @@ public class Unicycle : MonoBehaviour
         var tilt = Mathf.Min(Mathf.Abs(transform.rotation.z), maxTiltAngle) / maxTiltAngle;
             // tilt = Mathf.Pow(tilt, 2); // 제곱하여 민감도 조절
         return moveSpeed * tilt;
+    }
+
+    private const float GameOverTorque = 3f;
+    private const float GameOverForce = 10f;
+    public void GameOver()
+    {
+        rb.constraints = RigidbodyConstraints.None;
+        var dz = UnityEngine.Random.Range(-GameOverTorque, GameOverTorque);
+        var torque = new Vector3(GameOverTorque, 0f, dz);
+        var worldTorque = transform.TransformDirection(torque);
+        
+        rb.AddTorque(worldTorque, ForceMode.Impulse);
+        
+        var knockbackForce = new Vector3(0f, GameOverForce, -GameOverForce * 0.5f);
+        rb.linearVelocity = knockbackForce;
+        
+        GameManager.instance.GameOver();
     }
 
     private void OnDrawGizmosSelected()
