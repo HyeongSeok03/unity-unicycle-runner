@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TimeSlowItem : Item
 {
-    protected override void ApplyEffect(Unicycle player)
+    public override void ApplyEffect(Unicycle player)
     {
         base.ApplyEffect(player);
     }

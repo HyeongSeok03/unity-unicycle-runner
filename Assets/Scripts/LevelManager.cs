@@ -15,29 +15,27 @@ public class LevelManager : MonoBehaviour
     public float timePerLevel = 10f;
     
     [Header("Obstacle Speed")]
-    public float obstacleSpeed = 5f;
+    public float moveSpeed = 5f;
     public float speedIncreaseRate = 0.1f;
     public float maxObstacleSpeed = 20f;
     
     public float initialSpeed;
     private float _levelTimer = 0f;
-    private ObstacleManager _manager;
     
     public static float GetObstacleSpeed()
     {
-        return instance.obstacleSpeed;
+        return instance.moveSpeed;
     }
 
     public static void SetObstacleSpeed(float speed)
     {
-        instance.obstacleSpeed = speed;
+        instance.moveSpeed = speed;
     }
     
     private void Awake()
     {
         instance = this;
-        initialSpeed = obstacleSpeed;
-        _manager = GetComponent<ObstacleManager>();
+        initialSpeed = moveSpeed;
         StartCoroutine(IncreaseSpeedCoroutine());
     }
     
@@ -57,10 +55,10 @@ public class LevelManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
             
-            if (obstacleSpeed < maxObstacleSpeed)
+            if (moveSpeed < maxObstacleSpeed)
             {
-                obstacleSpeed += speedIncreaseRate * 0.1f;
-                obstacleSpeed = Mathf.Min(obstacleSpeed, maxObstacleSpeed);
+                moveSpeed += speedIncreaseRate * 0.1f;
+                moveSpeed = Mathf.Min(moveSpeed, maxObstacleSpeed);
             }
             score += level;
             OnScoreChanged?.Invoke(score);

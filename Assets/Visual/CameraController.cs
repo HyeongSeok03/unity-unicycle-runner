@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         cam.transform.position = new Vector3(player.transform.position.x, 5, player.transform.position.z - 10);
-        var ratio = (_levelManager.obstacleSpeed - _levelManager.initialSpeed) / _levelManager.maxObstacleSpeed;
+        var ratio = (_levelManager.moveSpeed - _levelManager.initialSpeed) / _levelManager.maxObstacleSpeed;
         cam.fieldOfView = _initialFov + (maxFovIncrease * ratio);
     }
 }

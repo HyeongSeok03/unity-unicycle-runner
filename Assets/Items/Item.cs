@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
     [SerializeField] protected float effectDuration = 3f;
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] GameObject childObject;
+    
     bool _active = false;
 
     void Start()
@@ -20,18 +21,16 @@ public class Item : MonoBehaviour
         transform.Translate(Vector3.back * (moveSpeed * Time.deltaTime));
         if (transform.position.z < 0f && !_active)
         {
-            var newColor = mr.material.color;
+            var newColor = mr!.material.color;
             newColor.a = 0.5f;
 
             mr.material.color = newColor;
-            Destroy(gameObject, 1f);
+            Destroy(gameObject);
         }
     }
 
-    protected virtual void ApplyEffect(Unicycle player)
+    public virtual void ApplyEffect(Unicycle player)
     {
-        _active = true;
-        SetInvisible();
         StartCoroutine(EffectDurationCoroutine(player));
     }
     
@@ -42,17 +41,18 @@ public class Item : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Unicycle player = other.GetComponent<Unicycle>();
-
-        if (player != null)
+        if (other.CompareTag("Player"))
         {
-            ApplyEffect(player);
+            var player = other.GetComponent<Unicycle>();
+            player.SetActiveItem(this);
+            _active = true;
+            SetInvisible();
         }
     }
 
     private void SetInvisible()
     {
-        mr.enabled = false;
+        mr!.enabled = false;
         cd.enabled = false;
         if(childObject != null)
             childObject.SetActive(false);

@@ -30,10 +30,18 @@ public class Unicycle : MonoBehaviour
     private bool _isGrounded;
     private Vector2 _moveInput;
     
+    private Item _activeItem;
+    
     public bool doubleJumpActive = false;
     public bool IsGrounded => _isGrounded;
     
     public bool shieldActive = false;
+    
+    public void SetActiveItem(Item item)
+    {
+        _activeItem = item;
+        Debug.Log("Set Item " + _activeItem.name);
+    }
     
     private void Awake()
     {
@@ -69,6 +77,14 @@ public class Unicycle : MonoBehaviour
     {
         if(_isGrounded || CanDoubleJump())
             rb.linearVelocity = new Vector3(0, jumpForce);
+    }
+
+    private void OnAttack(InputValue value)
+    {
+        if (!_activeItem) return;
+        _activeItem?.ApplyEffect(this);
+        Debug.Log("Interact with item: " + _activeItem?.name);
+        _activeItem = null;
     }
     
     private bool CanDoubleJump()

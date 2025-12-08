@@ -13,7 +13,7 @@ public class ChunkGenerator : MonoBehaviour
     public float startOffset = 25f;        // 시작할때 플레이어의 얼마나 앞에 있을지.
 
     [Header("Move Settings")]
-    public float moveSpeed = 10f;          // 뒤로 움직이는 속도
+    public float moveSpeed => LevelManager.instance.moveSpeed;          // 뒤로 움직이는 속도
 
     [Header("Destroy Settings")]
     public Transform player;               // 플레이어 기준점
