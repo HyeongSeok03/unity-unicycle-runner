@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3849250909392286188}
   - component: {fileID: 4419026903340189885}
   - component: {fileID: 6139135843533123230}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Concrete_fence_v2_S
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -176,7 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca4a768ce874b94c82743e8bb971919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
   size: {x: 40, y: 20, z: 60}
   color: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &6187939570114955821
@@ -192,7 +191,7 @@ GameObject:
   - component: {fileID: 2791474979650696191}
   - component: {fileID: 3711074019213700796}
   - component: {fileID: 5072689987154129938}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Barrel_v3_single
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +281,7 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
@@ -318,7 +317,7 @@ GameObject:
   - component: {fileID: 6531859859410217664}
   - component: {fileID: 7180742122254957941}
   - component: {fileID: 5223730985510013186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Industrial_pipe_v1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +407,7 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
@@ -444,7 +443,7 @@ GameObject:
   - component: {fileID: 5738433785510280378}
   - component: {fileID: 4286463162202661970}
   - component: {fileID: 6489516681818773405}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Barrel_v2_quadro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +533,7 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
@@ -569,7 +568,7 @@ GameObject:
   - component: {fileID: 3340887261772715009}
   - component: {fileID: 8525766395683530410}
   - component: {fileID: 5408048357468409135}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Concrete_fence_v2_lattice_S
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +658,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

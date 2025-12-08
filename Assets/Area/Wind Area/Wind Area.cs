@@ -4,14 +4,8 @@ public class WindArea : Area
 {
     [SerializeField] private float torque = 5f;
     [SerializeField] private ParticleSystem windEffect;
-    
-    private int _direction = 1;
-    
-    private void Start()
-    {
-        _direction = -1;
-        windEffect.transform.localScale = new Vector3(1f, 1f, -1 * _direction);
-    }
+
+    [SerializeField] private int _direction = 1;
     
     protected override void Apply(Unicycle player)
     {
