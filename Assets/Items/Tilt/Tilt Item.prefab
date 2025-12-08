@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mr: {fileID: 7896703760542125976}
   cd: {fileID: 1617704698810661615}
-  effectDuration: 3
+  effectDuration: 1
   moveSpeed: 5
   childObject: {fileID: 7886698180311788592}
   instant: 0

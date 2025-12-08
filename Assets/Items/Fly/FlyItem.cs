@@ -11,15 +11,16 @@ public class FlyItem : Item
 
     RigidbodyConstraints defaultConstraints;
 
-    protected override IEnumerator EffectDurationCoroutine(Unicycle player)
+    public override void ApplyEffect (Unicycle player)
     {
         player.wing.SetActive(true);
         Rigidbody rb = player.GetComponent<Rigidbody>();
         defaultConstraints = rb.constraints;
 
-        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+        rb.constraints = RigidbodyConstraints.FreezePositionY;
         rb.useGravity = false;
         rb.linearVelocity = Vector3.zero; // 혹시 모를 관성 제거
+        rb.angularVelocity = Vector3.zero;
 
         // 이동 목표값 미리 계산
         float startY = player.transform.position.y;
@@ -28,22 +29,21 @@ public class FlyItem : Item
         // --- DOTween 시퀀스 시작 ---
         Sequence flySequence = DOTween.Sequence();
 
-        flySequence.Append(player.transform.DOMoveY(targetY, riseTime).SetEase(Ease.InOutQuad));
-        flySequence.Join(player.transform.DORotate(Vector3.zero, riseTime).SetEase(Ease.InOutQuad));
+        player.transform.DOMoveY(targetY, riseTime).SetEase(Ease.InOutQuad);
+        player.transform.DORotate(Vector3.zero, riseTime).SetEase(Ease.InOutQuad);
 
         // 떠 있는 시간 대기
         flySequence.AppendInterval(floatTime);
-
-        // 천천히 내려오기
-        flySequence.Append(player.transform.DOMoveY(startY, fallTime).SetEase(Ease.InQuad));
-
-        // 시퀀스가 모두 끝날 때까지 대기
-        yield return flySequence.WaitForCompletion();
-
-        // --- 종료 및 복구 ---
+        
+        flySequence.OnComplete(() => RestorePlayer(player));
+    }
+    
+    private void RestorePlayer(Unicycle player)
+    {
+        player.wing.SetActive(false);
+        Rigidbody rb = player.GetComponent<Rigidbody>();
         rb.constraints = defaultConstraints;
         rb.useGravity = true;
-        player.wing.SetActive(false);
-        Destroy(gameObject);
+        player.isActiving = false;
     }
 }

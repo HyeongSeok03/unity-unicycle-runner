@@ -31,6 +31,7 @@ public class Unicycle : MonoBehaviour
     private Vector2 _moveInput;
     
     private Item _activeItem;
+    public bool isActiving;
     
     public bool IsGrounded => _isGrounded;
     
@@ -49,13 +50,14 @@ public class Unicycle : MonoBehaviour
     
     public void SetActiveItem(Item item)
     {
+        if (isActiving) return;
         _activeItem = item;
         Debug.Log("Set Item " + _activeItem.name);
     }
     
     private void Awake()
     {
-        if (instance == null)
+        if (!instance)
             instance = this;
         else
             Destroy(gameObject);
@@ -112,7 +114,9 @@ public class Unicycle : MonoBehaviour
     private void OnAttack(InputValue value)
     {
         if (!_activeItem) return;
+        
         _activeItem?.ApplyEffect(this);
+        isActiving = true;
         Debug.Log("Interact with item: " + _activeItem?.name);
         _activeItem = null;
     }

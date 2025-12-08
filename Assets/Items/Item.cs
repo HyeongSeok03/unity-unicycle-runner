@@ -30,6 +30,11 @@ public class Item : MonoBehaviour
         StartCoroutine(EffectDurationCoroutine(player));
     }
     
+    public virtual void OnDupplicate(Unicycle player)
+    {
+        // Default: Do nothing
+    }
+    
     protected virtual IEnumerator EffectDurationCoroutine(Unicycle player)
     {
         yield return null;
