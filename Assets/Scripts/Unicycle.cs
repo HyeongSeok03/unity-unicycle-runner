@@ -15,7 +15,6 @@ public class Unicycle : MonoBehaviour
     [Range(-0.5f, 0.5f)] public float centerOfMassY = 0.1f; // 무게 중심 Y 위치
     [Range(0f, 1f)] public float moveTiltAngle = 0.1f;   // 이동 시 기울기 각도
     [Range(0f, 1f)] public float maxTiltAngle = 0.5f;    // 최대 기울기 각도
-    [Range(0f, 1f)] public float gameOverTiltAngle = 0.7f; // 게임 오버 기울기 각도
 
     [Header("Ground Check Settings")]
     public Vector3 groundCheckPosition; // 지면 체크 위치
@@ -25,6 +24,8 @@ public class Unicycle : MonoBehaviour
     [Header("Item Active")]
     public GameObject wing;
     public GameObject shield;
+
+    public InputActionReference jumpInput;
     
     private int _moveDirection = 0;
     private bool _isGrounded;
@@ -61,6 +62,18 @@ public class Unicycle : MonoBehaviour
         com.y = centerOfMassY;
         rb.centerOfMass = com;
     }
+
+    private void Update()
+    {
+        if (jumpInput.action.WasPressedThisFrame())
+        {
+            Jump();
+        }
+        if (jumpInput.action.WasReleasedThisFrame())
+        {
+            JumpCanceled();
+        }
+    }
     
     private void FixedUpdate()
     {
@@ -75,10 +88,18 @@ public class Unicycle : MonoBehaviour
         _moveInput = value.Get<Vector2>(); // (x: A/D)
     }
 
-    private void OnJump(InputValue value)
+    private void Jump()
     {
         if(_isGrounded || CanDoubleJump())
             rb.linearVelocity = new Vector3(0, jumpForce);
+    }
+    
+    private void JumpCanceled()
+    {
+        if (rb.linearVelocity.y > 0)
+        {
+            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y * 0.25f);
+        }
     }
 
     private void OnAttack(InputValue value)
