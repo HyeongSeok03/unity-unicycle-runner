@@ -33,6 +33,8 @@ public class Unicycle : MonoBehaviour
     private Item _activeItem;
     
     public bool doubleJumpActive = false;
+    private bool _doubleJumpUsed = false;
+    
     public bool IsGrounded => _isGrounded;
     
     public bool shieldActive = false;
@@ -89,11 +91,12 @@ public class Unicycle : MonoBehaviour
     
     private bool CanDoubleJump()
     {
-        if(!_isGrounded && doubleJumpActive)
+        if (!_isGrounded && doubleJumpActive && !_doubleJumpUsed)
         {
-            doubleJumpActive = false;
+            _doubleJumpUsed = true;
             return true;
         }
+        
         return false;
     }
 
@@ -102,6 +105,9 @@ public class Unicycle : MonoBehaviour
     {
         var position = transform.position + groundCheckPosition;
         _isGrounded = Physics.CheckSphere(position, groundCheckRadius, groundLayer);
+        
+        if (_isGrounded)
+            _doubleJumpUsed = false;
     }
 
     private void ApplyTilt()

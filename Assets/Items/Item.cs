@@ -9,17 +9,18 @@ public class Item : MonoBehaviour
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] GameObject childObject;
     
-    bool _active = false;
+    [SerializeField] private bool instant = false;
+    private bool _active = false;
 
-    void Start()
+    private void Start()
     {
         moveSpeed = LevelManager.GetObstacleSpeed();
     }
 
-    void Update()
+    private void Update()
     {
         transform.Translate(Vector3.back * (moveSpeed * Time.deltaTime));
-        if (transform.position.z < 0f && !_active)
+        if (transform.position.z < -10f && !_active)
         {
             var newColor = mr!.material.color;
             newColor.a = 0.5f;
@@ -44,6 +45,14 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             var player = other.GetComponent<Unicycle>();
+            
+            if (instant)
+            {
+                ApplyEffect(player);
+                Destroy(gameObject);
+                return;
+            }
+            
             player.SetActiveItem(this);
             _active = true;
             SetInvisible();
